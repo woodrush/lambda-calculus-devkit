@@ -283,8 +283,8 @@ $(UNI): ./build/uni.c
 
 .PHONY: asc2bin
 asc2bin: $(ASC2BIN)
-$(ASC2BIN): ./tools/asc2bin.c
-	cd build; $(CC) ../tools/asc2bin.c -O2 -o asc2bin
+$(ASC2BIN): ./src/asc2bin.c
+	cd build; $(CC) ../src/asc2bin.c -O2 -o asc2bin
 	mv build/asc2bin ./bin
 	chmod 755 $(ASC2BIN)
 
