@@ -1,6 +1,6 @@
 # Lambda Calculus Development Toolkit
 
-This repo is a collection of tools written by various authors, for writing programs in lambda calculus and SKI combinator calculus.
+This repo is a collection of tools for writing programs in lambda calculus and SKI combinator calculus, written by various authors.
 
 
 
