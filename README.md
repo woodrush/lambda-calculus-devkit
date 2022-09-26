@@ -18,12 +18,7 @@ Supported interpreters are:
 
 ## Supported Lambda Calculus Interpreters
 Below is a summary of the supported lambda calculus interpreters.
-All interpreters run on the terminal and automatically handles the previously described
-string-to-lambda encoding for the standard I/O.
 Each interpreter uses a slightly different I/O encoding, classified below as languages.
-
-LambdaLisp is written natively as a lambda term based on the language [Binary Lambda Calculus](https://tromp.github.io/cl/cl.html).
-It is adapted to other languages by wrapping it with an [encoder-decoder](./src/lazyk-ulamb-blc-wrapper.cl) that absorbs the language spec differences.
 
 
 | Language                                                     | Extension | Engine                  | Program Format               |
@@ -56,7 +51,7 @@ make interpreters
 
 Or, to build them individually:
 ```sh
-make blc tromp uni clamb lazyk asc2bin
+make blc tromp uni lambda clamb lazyk asc2bin
 ```
 
 Here, asc2bin is a utility that packs ASCII 0/1 bitstreams to a byte stream, the format accepted by the BLC and UL interpreters.
@@ -67,10 +62,9 @@ When the make recipe is run, each recipe obtains these external source codes usi
 - `blc`:
   - `Blc.S`: `wget https://justine.lol/lambda/Blc.S?v=2`
   - `flat.lds`: `wget https://justine.lol/lambda/flat.lds`
+- `lambda`:
+  - Various files from `https://justine.lol/lambda/`
 - `uni`: `wget https://tromp.github.io/cl/uni.c`
 - `tromp`: `wget http://www.ioccc.org/2012/tromp/tromp.c`
 - `clamb`: `git clone https://github.com/irori/clamb`
 - `lazyk`: `git clone https://github.com/irori/lazyk`
-
-
-
