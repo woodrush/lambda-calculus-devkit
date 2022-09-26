@@ -267,3 +267,19 @@ $(ASC2BIN): ./tools/asc2bin.c
 	mv build/asc2bin ./bin
 	chmod 755 $(ASC2BIN)
 
+
+.PHONY: lam2bin
+lam2bin: $(LAM2BIN)
+
+build/lam2bin.c:
+	mkdir -p ./build
+	wget https://justine.lol/lambda/lam2bin.c
+	mv lam2bin.c ./build
+
+$(LAM2BIN): build/lam2bin.c
+	# Extend the maximum term limit to execute large programs
+	cd build; cat lam2bin.c | sed -e 's/int args[1024];/int args[16777216];/' > lam2bin_ext.c
+	cd build; $(CC) -c -o lam2bin lam2bin_ext.c
+	mv build/lam2bin ./bin
+	chmod 755 $(LAM2BIN)
+
