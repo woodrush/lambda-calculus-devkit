@@ -8,21 +8,9 @@ TROMP=./bin/tromp
 ULAMB=./bin/clamb
 LAZYK=./bin/lazyk
 SBCL=sbcl
-LATEX=latex
-DVIPDFMX=dvipdfmx
 
 ASC2BIN=./bin/asc2bin
 
-target_blc=./bin/lambdalisp.blc
-target_ulamb=./bin/lambdalisp.ulamb
-target_lazyk=./bin/lambdalisp.lazy
-target_latex=out/lambdalisp.tex
-target_pdf=lambdalisp.pdf
-
-def_prelude=./src/build/def-prelude.cl
-def_prelude_lazyk=./src/build/def-prelude-lazyk.cl
-
-BASE_SRCS=./src/lambdalisp.cl ./src/lambdacraft.cl ./src/prelude.lisp
 
 
 all:
@@ -47,8 +35,6 @@ test-all: interpreters test-blc-uni test-ulamb test-lazyk test-compiler-hosting-
 interpreters: uni clamb lazyk tromp blc asc2bin
 interpreters-nonlinux: uni clamb lazyk tromp asc2bin
 
-# Build the PDF file
-pdf: $(target_pdf)
 
 
 #================================================================
@@ -193,60 +179,8 @@ out/%.lazyk-out.expected-diff: ./out/%.lazyk-out ./test/%.out
 	diff $^ || exit 1
 
 
-#================================================================
-# Building the source
-#================================================================
-# Compile the prelude
-$(def_prelude): ./src/prelude.lisp ./tools/compile-prelude.sh
-	mkdir -p src/build
-	./tools/compile-prelude.sh > $(def_prelude).tmp
-	mv $(def_prelude).tmp $(def_prelude)
-
-$(def_prelude_lazyk): ./src/prelude.lisp ./tools/compile-prelude.sh
-	mkdir -p src/build
-	./tools/compile-prelude.sh compile-lazyk > $(def_prelude_lazyk).tmp
-	mv $(def_prelude_lazyk).tmp $(def_prelude_lazyk)
 
 
-# Compile the main code
-.PHONY: blc-src
-blc-src: $(target_blc)
-$(target_blc): $(BASE_SRCS) $(def_prelude) ./src/main.cl
-	cd src; sbcl --script main.cl > ../$(target_blc).tmp
-	mv $(target_blc).tmp $(target_blc)
-
-.PHONY: ulamb-src
-ulamb-src: $(target_ulamb)
-$(target_ulamb): $(BASE_SRCS) $(def_prelude) ./src/main-ulamb.cl ./src/lazyk-ulamb-blc-wrapper.cl
-	cd src; sbcl --script ./main-ulamb.cl > ../$(target_ulamb).tmp
-	mv $(target_ulamb).tmp $(target_ulamb)
-
-.PHONY: lazyk-src
-lazyk-src: $(target_lazyk)
-$(target_lazyk): $(BASE_SRCS) $(def_prelude_lazyk) ./src/main-lazyk.cl ./src/lazyk-ulamb-blc-wrapper.cl ./src/lazyk-chars.cl
-	@echo "Compiling to Lazy K takes a while (several minutes)."
-	cd src; sbcl --script ./main-lazyk.cl > ../$(target_lazyk).tmp
-
-	# Replace ``s`kki with k, which are equivalent terms
-	cat $(target_lazyk).tmp | sed s/\`\`s\`kki/k/g > $(target_lazyk).tmp2
-	cat $(target_lazyk).tmp2 | sed -e 's/\(................................................................................\)/\1\n/g' > $(target_lazyk).tmp
-	mv $(target_lazyk).tmp $(target_lazyk)
-	rm $(target_lazyk).tmp2
-
-
-# Additional targets
-.PRECIOUS: $(target_latex)
-$(target_latex): $(BASE_SRCS) $(def_prelude) ./src/main-latex.cl ./tools/main.tex ./tools/make-latex.sh
-	mkdir -p ./out
-	./tools/make-latex.sh
-	mv lambdalisp.tex out
-
-.PHONY: pdf
-$(target_pdf): $(target_latex)
-	cp ./tools/main.tex out
-	cd out; $(LATEX) main.tex
-	cd out; $(DVIPDFMX) main.dvi -o lambdalisp.pdf
-	mv out/lambdalisp.pdf .
 
 
 #================================================================
