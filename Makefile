@@ -2,13 +2,21 @@
 # Please see README.md for details.
 CC=cc
 
+# Binary lambda calculus
 BLC=./bin/Blc
 UNI=./bin/uni
 TROMP=./bin/tromp
-ULAMB=./bin/clamb
-LAZYK=./bin/lazyk
-SBCL=sbcl
+UNIPP=./bin/uni++
+UNID=./bin/unid
 
+# Universal lambda
+ULAMB=./bin/clamb
+
+# Lazy K
+LAZYK=./bin/lazyk
+
+
+# Tools
 ASC2BIN=./bin/asc2bin
 LAM2BIN=./bin/lam2bin
 
@@ -186,6 +194,22 @@ out/%.lazyk-out.expected-diff: ./out/%.lazyk-out ./test/%.out
 #================================================================
 # Building the interpreters
 #================================================================
+.PHONY: uni++
+uni++: $(UNIPP)
+./build/binary-lambda-calculus/uni.cpp:
+	mkdir -p ./build
+	cd build; git clone https://github.com/melvinzhang/binary-lambda-calculus
+
+$(UNIPP): ./build/binary-lambda-calculus/uni.cpp
+	cd build/binary-lambda-calculus && make uni
+	mv ./build/binary-lambda-calculus/uni $(UNIPP)
+
+.PHONY: unid
+unid: $(UNID)
+$(UNID): ./build/binary-lambda-calculus/uni.cpp
+	cd build/binary-lambda-calculus && make unid
+	mv ./build/binary-lambda-calculus/unid $(UNID)
+
 .PHONY: clamb
 clamb: $(ULAMB)
 ./build/clamb/clamb.c:
