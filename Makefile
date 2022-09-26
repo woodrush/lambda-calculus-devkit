@@ -300,7 +300,7 @@ build/lam2bin.c:
 	wget https://justine.lol/lambda/lam2bin.c
 	mv lam2bin.c ./build
 
-build/lam2bin_ext.c:
+build/lam2bin_ext.c: build/lam2bin.c
 	# Extend the maximum term limit to execute large programs
 	cd build; cat lam2bin.c | sed 's/int args\[1024\];/int args\[16777216\];/' > lam2bin_ext.c
 
