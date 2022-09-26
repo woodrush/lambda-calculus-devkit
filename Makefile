@@ -10,7 +10,7 @@ UNIPP=./bin/uni++
 UNID=./bin/unid
 
 # Universal lambda
-ULAMB=./bin/clamb
+CLAMB=./bin/clamb
 
 # Lazy K
 LAZYK=./bin/lazyk
@@ -211,15 +211,15 @@ $(UNID): ./build/binary-lambda-calculus/uni.cpp
 	mv ./build/binary-lambda-calculus/unid $(UNID)
 
 .PHONY: clamb
-clamb: $(ULAMB)
+clamb: $(CLAMB)
 ./build/clamb/clamb.c:
 	mkdir -p ./build
 	cd build; git clone https://github.com/irori/clamb
 
-$(ULAMB): ./build/clamb/clamb.c
+$(CLAMB): ./build/clamb/clamb.c
 	cd build/clamb; $(CC) -O2 clamb.c -o clamb
 	mv build/clamb/clamb ./bin
-	chmod 755 $(ULAMB)
+	chmod 755 $(CLAMB)
 
 
 .PHONY: lazyk
