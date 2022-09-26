@@ -3,12 +3,17 @@
 This repo is a collection of tools written by various authors, for writing programs in lambda calculus and SKI combinator calculus.
 
 
+
 Supported interpreters are:
 
 - SectorLambda, the [521-byte lambda calculus interpreter](https://justine.lol/lambda/) written by Justine Tunney
 - The [IOCCC](https://www.ioccc.org/) 2012 ["Most functional"](https://www.ioccc.org/2012/tromp/hint.html) interpreter written by John Tromp
   (the [source](https://www.ioccc.org/2012/tromp/tromp.c) is in the shape of a λ)
 - Universal Lambda interpreter [clamb](https://github.com/irori/clamb) and Lazy K interpreter [lazyk](https://github.com/irori/lazyk) written by Kunihiko Sakamoto
+
+
+## Dependency Graph
+![Lambda calculus language dependency graph](./bin/graph.png)
 
 
 ## Supported Lambda Calculus Interpreters

@@ -1,0 +1,59 @@
+digraph G {
+    rankdir=LR
+    {
+        rank = same;
+        lambdacraft [label="LambdaCraft\n(Common Lisp)"]
+        lam [label="*.lam\n(Plaintext lambda\nwith macros)"]
+        __l1 [label="Human-friendly code" shape="plaintext"]
+    }
+
+    {        
+        rank = same;
+        lam_oneline [label="*.lam\n(One-liner plaintext\nclosed lambda)"]
+        __l2 [label="Plaintext closed lambda" shape="plaintext"]
+    }
+
+    {
+        rank = same;
+        blc [label="*.blc\n(BLC, ASCII 0/1\nBLC notation)"]
+        ulamb [label="*.ulamb\n(UL, ASCII 0/1\nBLC notation)"]
+        lazy [label="*.lazy\n(Lazy K,\nSKI notation)"]
+        __l3 [label="BLC/SKI notation\n(ASCII)" shape="plaintext"]
+    }
+
+    {
+        rank = same;
+        Blc [label="*.Blc\n(BLC, binary)"]
+        Ulamb [label="*.Ulamb\n(UL, binary)"]
+        __l4 [label="0/1 bit streams\npacked to bytes" shape="plaintext"]
+    }
+
+    {
+        rank = same;
+        Blc_interpreter [label="Blc (BLC)"]
+        unipp [label="uni++ (BLC)"]
+        tromp [label="tromp (BLC)"]
+        clamb [label="clamb (UL)"]
+        lazyk [label="lazyk (Lazy K)"]
+        __l5 [label="Interpreters" shape="plaintext"]
+    }
+
+
+    lam_oneline -> blc   [label="lam2bin/blc-AIT"]
+    lam_oneline -> ulamb [label="lam2bin/blc-AIT"]
+    lam -> blc [label="blc-AIT"]
+    lam -> ulamb [label="blc-AIT"]
+    lambdacraft -> blc [label="LambdaCraft"]
+    lambdacraft -> ulamb [label="LambdaCraft"]
+    lambdacraft -> lazy [label="LambdaCraft"]
+    lambdacraft -> lam_oneline [label="LambdaCraft"]
+
+    blc -> Blc [label="asc2bin"]
+    ulamb -> Ulamb [label="asc2bin"]
+
+    Blc -> Blc_interpreter
+    Blc -> unipp
+    Blc -> tromp
+    Ulamb -> clamb
+    lazy -> lazyk
+}
