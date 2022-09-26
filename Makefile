@@ -302,7 +302,7 @@ build/lam2bin_ext.c: build/lam2bin.c
 	cd build; cat lam2bin.c | sed 's/int args\[1024\];/int args\[16777216\];/' > lam2bin_ext.c
 
 $(LAM2BIN): build/lam2bin_ext.c
-	cd build; $(CC) -c -o lam2bin lam2bin_ext.c
+	cd build; $(CC) -O2 -o lam2bin lam2bin_ext.c
 	mv build/lam2bin ./bin
 	chmod 755 $(LAM2BIN)
 
