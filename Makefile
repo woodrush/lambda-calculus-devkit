@@ -10,7 +10,7 @@ LAZYK=./bin/lazyk
 SBCL=sbcl
 
 ASC2BIN=./bin/asc2bin
-
+LAM2BIN=./bin/lam2bin
 
 
 all:
@@ -186,6 +186,8 @@ out/%.lazyk-out.expected-diff: ./out/%.lazyk-out ./test/%.out
 #================================================================
 # Building the interpreters
 #================================================================
+.PHONY: clamb
+clamb: $(ULAMB)
 ./build/clamb/clamb.c:
 	mkdir -p ./build
 	cd build; git clone https://github.com/irori/clamb
@@ -195,9 +197,9 @@ $(ULAMB): ./build/clamb/clamb.c
 	mv build/clamb/clamb ./bin
 	chmod 755 $(ULAMB)
 
-.PHONY: clamb
-clamb: $(ULAMB)
 
+.PHONY: lazyk
+lazyk: $(LAZYK)
 ./build/lazyk/lazyk.c:
 	mkdir -p ./build
 	cd build; git clone https://github.com/irori/lazyk
@@ -207,9 +209,9 @@ $(LAZYK): ./build/lazyk/lazyk.c
 	mv build/lazyk/lazyk ./bin
 	chmod 755 $(LAZYK)
 
-.PHONY: lazyk
-lazyk: $(LAZYK)
 
+.PHONY: blc
+blc: $(BLC)
 build/Blc.S:
 	mkdir -p ./build
 	wget https://justine.lol/lambda/Blc.S?v=2
@@ -230,41 +232,38 @@ $(BLC): build/Blc.S build/flat.lds
 	mv build/Blc ./bin
 	chmod 755 $(BLC)
 
-.PHONY: blc
-blc: $(BLC)
 
 build/tromp.c:
 	mkdir -p ./build
 	wget http://www.ioccc.org/2012/tromp/tromp.c
 	mv tromp.c ./build
 
+.PHONY: tromp
+tromp: $(TROMP)
 $(TROMP): ./build/tromp.c
 	# Compile with the option -DA=9999999 (larger than the original -DM=999999) to execute large programs
 	cd build; $(CC) -Wall -W -std=c99 -O2 -m64 -DInt=long -DA=9999999 -DX=8 tromp.c -o tromp
 	mv build/tromp ./bin
 	chmod 755 $(TROMP)
 
-.PHONY: tromp
-tromp: $(TROMP)
-
 build/uni.c:
 	mkdir -p ./build
 	wget https://tromp.github.io/cl/uni.c
 	mv uni.c ./build
 
+.PHONY: uni
+uni: $(UNI)
 $(UNI): ./build/uni.c
 	# Compile with the option -DA=9999999 (larger than the original -DM=999999) to execute large programs
 	cd build; $(CC) -Wall -W -O2 -std=c99 -m64 -DM=9999999 uni.c -o uni
 	mv build/uni ./bin
 	chmod 755 $(UNI)
 
-.PHONY: uni
-uni: $(UNI)
 
+.PHONY: asc2bin
+asc2bin: $(ASC2BIN)
 $(ASC2BIN): ./tools/asc2bin.c
 	cd build; $(CC) ../tools/asc2bin.c -O2 -o asc2bin
 	mv build/asc2bin ./bin
 	chmod 755 $(ASC2BIN)
 
-.PHONY: asc2bin
-asc2bin: $(ASC2BIN)
