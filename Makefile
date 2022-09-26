@@ -21,9 +21,6 @@ ASC2BIN=./bin/asc2bin
 LAM2BIN=./bin/lam2bin
 
 
-all:
-	$(MAKE) $(target_blc)
-	$(MAKE) $(target_ulamb)
 
 run-repl: $(BLC) $(ASC2BIN)
 	( cat $(target_blc) | $(ASC2BIN); cat ) | $(BLC)

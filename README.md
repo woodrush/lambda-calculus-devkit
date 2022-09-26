@@ -10,7 +10,6 @@ Supported interpreters are:
   (the [source](https://www.ioccc.org/2012/tromp/tromp.c) is in the shape of a λ)
 - Universal Lambda interpreter [clamb](https://github.com/irori/clamb) and Lazy K interpreter [lazyk](https://github.com/irori/lazyk) written by Kunihiko Sakamoto
 
-More implementation details are introduced in [this blog post](https://woodrush.github.io/blog/lambdalisp.html).
 
 ## Supported Lambda Calculus Interpreters
 Below is a summary of the supported lambda calculus interpreters.
