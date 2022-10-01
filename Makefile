@@ -285,7 +285,7 @@ $(UNI): ./build/uni.c
 
 ./build/AIT:
 	mkdir -p ./build
-	git clone https://github.com/tromp/AIT
+	cd build; git clone https://github.com/tromp/AIT
 
 .PHONY: blc-ait
 blc-ait: $(BLCAIT)
