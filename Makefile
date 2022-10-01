@@ -8,6 +8,7 @@ UNI=./bin/uni
 TROMP=./bin/tromp
 UNIPP=./bin/uni++
 UNID=./bin/unid
+BLCAIT=./bin/blc-ait
 
 # Universal lambda
 CLAMB=./bin/clamb
@@ -279,6 +280,16 @@ $(UNI): ./build/uni.c
 	cd build; $(CC) -Wall -W -O2 -std=c99 -m64 -DM=9999999 uni.c -o uni
 	mv build/uni ./bin
 	chmod 755 $(UNI)
+
+./build/AIT:
+	mkdir -p ./build
+	git clone https://github.com/tromp/AIT
+
+.PHONY: blc-ait
+blc-ait: $(BLCAIT)
+$(BLCAIT): ./build/AIT ./build/AIT/AIT.lhs ./build/AIT/Lambda.lhs ./build/AIT/Main.lhs
+	cd ./build/AIT; make blc
+	mv ./build/AIT/blc ./bin/blc-ait
 
 
 .PHONY: asc2bin
