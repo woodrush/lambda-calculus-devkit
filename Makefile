@@ -21,6 +21,8 @@ LAZYK=./bin/lazyk
 ASC2BIN=./bin/asc2bin
 LAM2BIN=./bin/lam2bin
 
+# Others
+CABAL=cabal
 
 
 run-repl: $(BLC) $(ASC2BIN)
@@ -288,6 +290,9 @@ $(UNI): ./build/uni.c
 .PHONY: blc-ait
 blc-ait: $(BLCAIT)
 $(BLCAIT): ./build/AIT ./build/AIT/AIT.lhs ./build/AIT/Lambda.lhs ./build/AIT/Main.lhs
+	# Install Haskell dependencies
+	$(CABAL) install dlist --lib
+	$(CABAL) install mtl-2.2.2 --lib
 	cd ./build/AIT; make blc
 	mv ./build/AIT/blc ./bin/blc-ait
 
