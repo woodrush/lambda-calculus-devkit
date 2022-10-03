@@ -20,6 +20,7 @@ LAZYK=./bin/lazyk
 # Tools
 ASC2BIN=./bin/asc2bin
 LAM2BIN=./bin/lam2bin
+BCL2SKI=./bin/bcl2ski
 
 # Others
 CABAL=cabal
@@ -303,6 +304,13 @@ $(ASC2BIN): ./src/asc2bin.c
 	cd build; $(CC) ../src/asc2bin.c -O2 -o asc2bin
 	mv build/asc2bin ./bin
 	chmod 755 $(ASC2BIN)
+
+.PHONY: bcl2ski
+bcl2ski: $(BCL2SKI)
+$(BCL2SKI): ./src/bcl2ski.c
+	cd build; $(CC) ../src/bcl2ski.c -O2 -o bcl2ski
+	mv build/bcl2ski ./bin
+	chmod 755 $(BCL2SKI)
 
 
 .PHONY: lam2bin
