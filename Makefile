@@ -27,7 +27,7 @@ CABAL=cabal
 
 
 all: interpreters tools
-interpreters: Blc tromp uni uni++ clamb lazyk
+interpreters: blc tromp uni uni++ clamb lazyk
 tools: asc2bin lam2bin blc-ait
 
 
