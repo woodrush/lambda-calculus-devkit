@@ -4,6 +4,12 @@ This repo is a collection of tools for writing programs in lambda calculus and S
 
 This repo is designed and intended to be used as a dependency manager for projects related lambda calculus programming.
 
+This repo includes tools and interpreters for the following lambda-calculus-based languages:
+
+- [Binary Lambda Calculus](https://tromp.github.io/cl/cl.html)
+- [Universal Lambda](http://www.golfscript.com/lam/)
+- [Lazy K](https://tromp.github.io/cl/lazy-k.html)
+
 
 ## Dependency Graph
 ![Lambda calculus language dependency graph](./bin/graph.png)
@@ -14,18 +20,18 @@ Interpreters
 
 - [Blc](https://justine.lol/lambda/): Written by [Justine Tunney](https://github.com/jart). SectorLambda, a [521-byte lambda calculus interpreter](https://justine.lol/lambda/)
 - [tromp](https://www.ioccc.org/2012/tromp/hint.html): Written by [John Tromp](https://github.com/tromp). The [IOCCC](https://www.ioccc.org/) 2012 ["Most functional"](https://www.ioccc.org/2012/tromp/hint.html) interpreter
-  (the [source](https://www.ioccc.org/2012/tromp/tromp.c) is in the shape of a λ)
+  (its [source](https://www.ioccc.org/2012/tromp/tromp.c) is in the shape of a λ)
 - [uni](https://tromp.github.io/cl/cl.html): Written by [John Tromp](https://github.com/tromp). An unobfuscated version of `tromp`
-- [uni++](https://github.com/melvinzhang/binary-lambda-calculus): Written by [Melvin Zhang](https://github.com/melvinzhang). Fast binary lambda calculus interpreter written in C++, featuring many speed and memory optimizations.
+- [uni++](https://github.com/melvinzhang/binary-lambda-calculus): Written by [Melvin Zhang](https://github.com/melvinzhang). A fast binary lambda calculus interpreter written in C++, featuring many speed and memory optimizations.
   - A rewrite of `uni`. Originally named `uni`. Named `uni++` in this repo to distinguish from `uni`
 - [lazyk](https://github.com/irori/lazyk): Written by [Kunihiko Sakamoto](https://github.com/irori). A fast [Lazy K](https://tromp.github.io/cl/lazy-k.html) interpreter
 - [clamb](https://github.com/irori/clamb): Written by [Kunihiko Sakamoto](https://github.com/irori). A fast [Universal Lambda](http://www.golfscript.com/lam/) interpreter
 
 Tools
 
-- asc2bin: Written by [Hikaru Ikuta](https://github.com/woodrush). Pack 0/1 ASCII bit streams to byte streams. Used for BLC interpreters
+- [asc2bin](src/asc2bin.c): Written by [Hikaru Ikuta](https://github.com/woodrush). Packs 0/1 ASCII bit streams to byte streams. Used for BLC interpreters
 - [lam2bin](https://justine.lol/lambda/): Written by [Justine Tunney](https://github.com/jart). Parses plaintext lambda terms such as `\x.x` to BLC notation
-- [blc-ait](https://github.com/tromp/AIT): Written by [John Tromp](https://github.com/tromp). A multi-functional tool for binary lambda calculus, binary combinator calculus, etc.
+- [blc-ait](https://github.com/tromp/AIT): Written by [John Tromp](https://github.com/tromp). A multi-functional tool for binary lambda calculus, binary combinator calculus, etc. Includes a head normal form optimizer for lambda terms and many more features.
   - Originally named `blc`. Named `blc-ait` in this repo to distinguish between `Blc`
 
 ## Other Tools
@@ -73,7 +79,7 @@ To build all tools:
 make asc2bin lam2bin blc-ait
 ```
 
-### Building 'tromp' on a Mac
+### Building `tromp` on a Mac
 Mac has `gcc` installed by default or via Xcode Command Line Tools.
 However, `gcc` is actually installed as an alias to `clang`, which is a different compiler that doesn't compile `tromp`.
 This is confirmable by running `gcc --version`. On my Mac, running it shows:
@@ -111,3 +117,5 @@ make tromp
 will compile `tromp`.
 
 
+## Usage
+Please see the "Running LambdaLisp" section in my other project [LambdaLisp](https://github.com/woodrush/lambdalisp#running-lambdalisp) for details.
