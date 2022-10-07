@@ -2,7 +2,7 @@
 
 This repo is a collection of tools for writing programs in lambda calculus and SKI combinator calculus, written by various authors.
 
-This repo is designed and intended to be used as a dependency manager for projects related lambda calculus programming.
+This repo is designed and intended to be used as a dependency manager for projects related to lambda calculus programming.
 
 This repo includes tools and interpreters for the following lambda-calculus-based languages:
 
