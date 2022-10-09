@@ -24,6 +24,7 @@ Interpreters
 - [uni](https://tromp.github.io/cl/cl.html): Written by [John Tromp](https://github.com/tromp). An unobfuscated version of `tromp`
 - [uni++](https://github.com/melvinzhang/binary-lambda-calculus): Written by [Melvin Zhang](https://github.com/melvinzhang). A fast binary lambda calculus interpreter written in C++, featuring many speed and memory optimizations.
   - A rewrite of `uni`. Originally named `uni`. Named `uni++` in this repo to distinguish from `uni`
+- [UniObf](https://github.com/tromp/AIT/blob/master/UniObf.hs): Written by [John Tromp](https://github.com/tromp). A bitwise BLC interpreter written in obfuscated-style Haskell
 - [lazyk](https://github.com/irori/lazyk): Written by [Kunihiko Sakamoto](https://github.com/irori). A fast [Lazy K](https://tromp.github.io/cl/lazy-k.html) interpreter
 - [clamb](https://github.com/irori/clamb): Written by [Kunihiko Sakamoto](https://github.com/irori). A fast [Universal Lambda](http://www.golfscript.com/lam/) interpreter
 
@@ -45,27 +46,29 @@ Below is a summary of the supported lambda calculus interpreters.
 Each interpreter uses a slightly different I/O encoding, classified below as languages.
 
 
-| Language                                                     | Extension | Engine                  | Program Format               |
-|--------------------------------------------------------------|-----------|-------------------------|------------------------------|
-| [Binary Lambda Calculus](https://tromp.github.io/cl/cl.html) | *.blc     | Untyped Lambda Calculus | Binary (asc2bin can be used) |
-| [Universal Lambda](http://www.golfscript.com/lam/)           | *.ulamb   | Untyped Lambda Calculus | Binary (asc2bin can be used) |
-| [Lazy K](https://tromp.github.io/cl/lazy-k.html)             | *.lazy    | SKI Combinator Calculus | ASCII                        |
+| Language                                                             | Extension       | Engine                  | Program Format               |
+|----------------------------------------------------------------------|-----------------|-------------------------|------------------------------|
+| [Binary Lambda Calculus](https://tromp.github.io/cl/cl.html)         | *.blc           | Untyped Lambda Calculus | Binary (asc2bin can be used) |
+| [Bitwise Binary Lambda Calculus](https://tromp.github.io/cl/cl.html) | *.blc, *.bitblc | Untyped Lambda Calculus | ASCII                        |
+| [Universal Lambda](http://www.golfscript.com/lam/)                   | *.ulamb         | Untyped Lambda Calculus | Binary (asc2bin can be used) |
+| [Lazy K](https://tromp.github.io/cl/lazy-k.html)                     | *.lazy          | SKI Combinator Calculus | ASCII                        |
 
-| Interpreter                                                     | Language               | Platforms    | Build Command | Author                                         | Notes                                                                                                                                                                                |
-|-----------------------------------------------------------------|------------------------|--------------|---------------|------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Blc](https://justine.lol/lambda/)                              | Binary Lambda Calculus | x86-64-Linux | `make blc`    | [@jart](https://github.com/jart)               | [521-byte interpreter](https://justine.lol/lambda/)                                                                                                                                  |
-| [tromp](https://www.ioccc.org/2012/tromp/hint.html)             | Binary Lambda Calculus | Any          | `make tromp`  | [@tromp](https://github.com/tromp)             | [IOCCC](https://www.ioccc.org/) 2012 ["Most functional"](https://www.ioccc.org/2012/tromp/hint.html) - the [source](https://www.ioccc.org/2012/tromp/tromp.c) is in the shape of a λ |
-| [uni](https://tromp.github.io/cl/cl.html)                       | Binary Lambda Calculus | Any          | `make uni`    | [@tromp](https://github.com/tromp)             | Unobfuscated version of `tromp`                                                                                                                                                      |
-| [uni++](https://github.com/melvinzhang/binary-lambda-calculus)  | Binary Lambda Calculus | Any          | `make uni++`  | [@melvinzhang](https://github.com/melvinzhang) | Fast binary lambda calculus interpreter written in C++, featuring many speed and memory optimizations. A rewrite of `uni`. Originally named `uni`                                    |
-| [clamb](https://github.com/irori/clamb)                         | Universal Lambda       | Any          | `make clamb`  | [@irori](https://github.com/irori)             | Fast UL interpreter                                                                                                                                                                  |
-| [lazyk](https://github.com/irori/lazyk)                         | Lazy K                 | Any          | `make lazyk`  | [@irori](https://github.com/irori)             | Fast Lazy K interpreter                                                                                                                                                              |
+| Interpreter                                                     | Language                       | Platforms    | Build Command | Author                                         | Notes                                                                                                                                                                                |
+|-----------------------------------------------------------------|--------------------------------|--------------|---------------|------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Blc](https://justine.lol/lambda/)                              | Binary Lambda Calculus         | x86-64-Linux | `make blc`    | [@jart](https://github.com/jart)               | [521-byte interpreter](https://justine.lol/lambda/)                                                                                                                                  |
+| [tromp](https://www.ioccc.org/2012/tromp/hint.html)             | Binary Lambda Calculus         | Any          | `make tromp`  | [@tromp](https://github.com/tromp)             | [IOCCC](https://www.ioccc.org/) 2012 ["Most functional"](https://www.ioccc.org/2012/tromp/hint.html) - the [source](https://www.ioccc.org/2012/tromp/tromp.c) is in the shape of a λ |
+| [uni](https://tromp.github.io/cl/cl.html)                       | Binary Lambda Calculus         | Any          | `make uni`    | [@tromp](https://github.com/tromp)             | Unobfuscated version of `tromp`                                                                                                                                                      |
+| [uni++](https://github.com/melvinzhang/binary-lambda-calculus)  | Binary Lambda Calculus         | Any          | `make uni++`  | [@melvinzhang](https://github.com/melvinzhang) | Fast binary lambda calculus interpreter written in C++, featuring many speed and memory optimizations. A rewrite of `uni`. Originally named `uni`                                    |
+| [UniObf](https://github.com/tromp/AIT/blob/master/UniObf.hs)    | Bitwise Binary Lambda Calculus | Any          | `make UniObf` | [@tromp](https://github.com/tromp)             | Features optimizations included in `uni++`. Written in obfuscated-style Haskell                                                                                                      |
+| [clamb](https://github.com/irori/clamb)                         | Universal Lambda               | Any          | `make clamb`  | [@irori](https://github.com/irori)             | Fast UL interpreter                                                                                                                                                                  |
+| [lazyk](https://github.com/irori/lazyk)                         | Lazy K                         | Any          | `make lazyk`  | [@irori](https://github.com/irori)             | Fast Lazy K interpreter                                                                                                                                                              |
 
 
 ## Building the Interpreters and Tools
 To build all interpreters:
 
 ```sh
-make blc tromp uni uni++ clamb lazyk
+make blc tromp uni uni++ UniObf clamb lazyk
 ```
 
 Several notes about the interpreters:
