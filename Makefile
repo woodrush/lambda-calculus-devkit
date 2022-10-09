@@ -187,7 +187,7 @@ $(UNIOBF): ./build/AIT ./build/AIT/UniObf.hs
 	$(CABAL) install dlist --lib
 	$(CABAL) install mtl-2.2.2 --lib
 	$(CABAL) install --lib parsec-3.1.14.0
-	cd ./build/AIT; ghc UniObf.hs
+	cd ./build/AIT; ghc -O UniObf.hs
 	mv ./build/AIT/UniObf ./bin
 
 
