@@ -8,6 +8,7 @@ UNI=./bin/uni
 TROMP=./bin/tromp
 UNIPP=./bin/uni++
 UNID=./bin/unid
+UNIOBF=./bin/UniObf
 BLCAIT=./bin/blc-ait
 
 # Universal lambda
@@ -19,6 +20,7 @@ LAZYK=./bin/lazyk
 
 # Tools
 ASC2BIN=./bin/asc2bin
+ASC2BIT=./bin/asc2bit
 LAM2BIN=./bin/lam2bin
 BCL2SKI=./bin/bcl2ski
 
@@ -27,7 +29,7 @@ CABAL=cabal
 
 
 all: interpreters tools
-interpreters: blc tromp uni uni++ clamb lazyk
+interpreters: blc tromp uni uni++ UniObf clamb lazyk
 tools: asc2bin lam2bin blc-ait
 
 
@@ -178,17 +180,37 @@ $(BLCAIT): ./build/AIT ./build/AIT/AIT.lhs ./build/AIT/Lambda.lhs ./build/AIT/Ma
 	cd ./build/AIT; make blc
 	mv ./build/AIT/blc ./bin/blc-ait
 
+.PHONY: UniObf
+UniObf: $(UNIOBF)
+$(UNIOBF): ./build/AIT ./build/AIT/UniObf.hs
+	# Install Haskell dependencies
+	$(CABAL) install dlist --lib
+	$(CABAL) install mtl-2.2.2 --lib
+	$(CABAL) install --lib parsec-3.1.14.0
+	cd ./build/AIT; ghc UniObf.hs
+	mv ./build/AIT/UniObf ./bin
+
 
 .PHONY: asc2bin
 asc2bin: $(ASC2BIN)
 $(ASC2BIN): ./src/asc2bin.c
+	mkdir -p build
 	cd build; $(CC) ../src/asc2bin.c -O2 -o asc2bin
 	mv build/asc2bin ./bin
 	chmod 755 $(ASC2BIN)
 
+.PHONY: asc2bit
+asc2bin: $(ASC2BIT)
+$(ASC2BIT): ./src/asc2bit.c
+	mkdir -p build
+	cd build; $(CC) ../src/asc2bit.c -O2 -o asc2bit
+	mv build/asc2bit ./bin
+	chmod 755 $@
+
 .PHONY: bcl2ski
 bcl2ski: $(BCL2SKI)
 $(BCL2SKI): ./src/bcl2ski.c
+	mkdir -p build
 	cd build; $(CC) ../src/bcl2ski.c -O2 -o bcl2ski
 	mv build/bcl2ski ./bin
 	chmod 755 $(BCL2SKI)
